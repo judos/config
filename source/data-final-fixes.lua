@@ -1,14 +1,11 @@
+require "libs.all"
+require "libs.prototypes.all"
+
 entityCosts = {}
 entityCategoryCosts = {}
 
 require "config"
 
-
-
--- belt_speed
-for name, data in pairs(data.raw["transport-belt"]) do
-	data.speed = data.speed * belt_speed
-end
 
 -- entity category costs: This sets the factor in the entityCosts table if it is not set yet
 entityCosts = entityCosts or {}
@@ -36,12 +33,15 @@ for recipeName, data in pairs(data.raw.recipe) do
 		if entityCosts[name] then factor = factor * entityCosts[name] end
 	end
 	if factor ~= 1 then
+		info(recipeName.." will change costs by "..tostring(factor))
 		for _, ingredient in pairs(data.ingredients) do
 			if ingredient.type then
-				ingredient.amount = ingredient.amount * factor
+				ingredient.amount = round(ingredient.amount * factor)
 			else
-				ingredient[2] = ingredient[2] * factor
+				ingredient[2] = round(ingredient[2] * factor)
 			end
 		end
 	end
 end
+
+-- 

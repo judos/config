@@ -1,3 +1,12 @@
+set = set or {}
+function set.table(s)
+	local t = { }
+  for v, _ in pairs(s) do 
+		table.insert(t,v)
+	end
+  return t
+end
+
 
 function overwriteContent(originalTable,newContent)
 	if originalTable == nil then
@@ -24,9 +33,9 @@ function table.addTable(t,toAdd)
 end
 
 function table.set(t) -- set of list
-  local u = { }
-  for _, v in ipairs(t) do u[v] = true end
-  return u
+  local s = { }
+  for _, v in ipairs(t) do s[v] = true end
+  return s
 end
 
 function table.clear(t)

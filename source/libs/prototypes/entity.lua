@@ -1,4 +1,5 @@
 -- entitiesTable: table of entities from data.raw table
+-- propertyName: may use dots inside the name to access sub properties
 function changeEntitiesPropertyByFactor(entitiesTable, propertyName, factor, roundValues)
 	for _,data in pairs(entitiesTable) do
 		if data[propertyName] then

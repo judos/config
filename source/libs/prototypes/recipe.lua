@@ -1,3 +1,55 @@
+function recipeChangeResultsForItemsByFactor(itemNameS, factor, roundValues)
+	if type(itemNameS) == "string" then
+		itemNameS = { itemNameS }
+	elseif type(itemNameS) ~= "table" then
+		err("Invalid type of argument passed: "..serpent.block(itemNameS))
+		return
+	end
+	info("All recipes will results "..tostring(factor).."x "..serpent.block(itemNameS))
+	local itemNamesSet = table.set(itemNameS)	-- convert itemNames table to set
+	-- loop through all recipes and change costs for that item
+	for _,recipe in pairs(data.raw.recipe) do
+		for _,data in pairs(recipe.ingredients) do
+			if recipe.result then
+				if itemNamesSet[recipe.result] then
+					recipe.result_count = (recipe.result_count or 1) * factor
+					if roundValues then recipe.result_count = round(recipe.result_count) end
+				end
+			else
+				for _,data in pairs(recipe.results) do
+					if itemNamesSet[data.name] then
+						data.amount = (data.amount or 1) * factor
+						if roundValues then data.amount = round(data.amount) end
+					end
+				end
+			end
+		end
+	end
+end
+
+function recipeChangeCostsForItemsByFactor(itemNameS, factor, roundValues)
+	if type(itemNameS) == "string" then
+		itemNameS = { itemNameS }
+	elseif type(itemNameS) ~= "table" then
+		err("Invalid type of argument passed: "..serpent.block(itemNameS))
+		return
+	end
+	info("All recipes will cost "..tostring(factor).."x "..serpent.block(itemNameS))
+	local itemNamesSet = table.set(itemNameS)	-- convert itemNames table to set
+	-- loop through all recipes and change costs for that item
+	for _,recipe in pairs(data.raw.recipe) do
+		for _,data in pairs(recipe.ingredients) do
+			if data.type and itemNamesSet[data.name] then
+				data.amount = data.amount * factor
+				if roundValues then data.amount = round(data.amount) end
+			elseif itemNamesSet[data[1]] then
+				data[2] = data[2] * factor
+				if roundValues then data[2] = round(data[2]) end
+			end
+		end
+	end
+end
+
 function recipeNamesOfItems(itemNameS)
 	if type(itemNameS) == "string" then
 		itemNameS = { itemNameS }

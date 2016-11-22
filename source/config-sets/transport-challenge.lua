@@ -1,3 +1,7 @@
+-- General recipe changes
+recipeChangeCostsForItemsByFactor("iron-plate", 2, true)
+recipeChangeResultsForItemsByFactor("iron-plate", 2, true)
+
 
 -- Slow down the speed of all transport-belts
 recipeChangeCostsByFactor(recipeNamesOfItems(entityNamesOfCategory("transport-belt", "underground-belt", "splitter")), 2)
@@ -8,6 +12,9 @@ recipeChangeCostsByFactor(recipeNamesOfItems(entityNamesOfCategory("locomotive",
 changeEntitiesPropertyByFactor( entitiesOfCategory("cargo-wagon", "locomotive"), "max_speed", 1.5)
 changeEntitiesPropertyByFactor( entitiesOfCategory("cargo-wagon", "locomotive", "car"), "weight", 0.5)
 changeEntitiesPropertyByFactor( entitiesOfCategory("cargo-wagon", "car"), "inventory_size", 0.25, true)
+
+-- TODO for next time: (access sub properties)
+--changeEntitiesPropertyByFactor( entitiesOfCategory("locomotive"), "energy_source.fuel_inventory_size", 0.33, true)
 
 --true means: round the values (inventory_size which is a decimal value will produce errors at startup of factorio)
 changeEntitiesPropertyByFactor( entitiesOfCategory("logistic-container", "container"), "inventory_size", 0.25, true) 

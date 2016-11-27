@@ -21,4 +21,9 @@ changeEntitiesPropertyByFactor( entitiesOfCategory("logistic-container", "contai
 
 
 -- Change technology: more science packs produced and required
-recipeChangeResultsForItemsByFactor({"science-pack-1","science-pack-2","science-pack-3"}, 5)
+recipeChangeResultsForItemsByFactor({"science-pack-1","science-pack-2"}, 5)
+recipeChangeResultsForItemsByFactor("science-pack-3", 25)
+
+-- pass technologyName (or a list of techs), targetItem (or a list of items) and multiply factor
+technologyChangeIngredientsAmountByFactor("all",{"science-pack-1","science-pack-2"},5)
+technologyChangeIngredientsAmountByFactor("all","science-pack-3",25)

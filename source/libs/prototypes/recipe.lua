@@ -9,18 +9,16 @@ function recipeChangeResultsForItemsByFactor(itemNameS, factor, roundValues)
 	local itemNamesSet = table.set(itemNameS)	-- convert itemNames table to set
 	-- loop through all recipes and change costs for that item
 	for _,recipe in pairs(data.raw.recipe) do
-		for _,data in pairs(recipe.ingredients) do
-			if recipe.result then
-				if itemNamesSet[recipe.result] then
-					recipe.result_count = (recipe.result_count or 1) * factor
-					if roundValues then recipe.result_count = round(recipe.result_count) end
-				end
-			else
-				for _,data in pairs(recipe.results) do
-					if itemNamesSet[data.name] then
-						data.amount = (data.amount or 1) * factor
-						if roundValues then data.amount = round(data.amount) end
-					end
+		if recipe.result then
+			if itemNamesSet[recipe.result] then
+				recipe.result_count = (recipe.result_count or 1) * factor
+				if roundValues then recipe.result_count = round(recipe.result_count) end
+			end
+		else
+			for _,data in pairs(recipe.results) do
+				if itemNamesSet[data.name] then
+					data.amount = (data.amount or 1) * factor
+					if roundValues then data.amount = round(data.amount) end
 				end
 			end
 		end
@@ -85,17 +83,16 @@ function recipeChangeCostsByFactor(recipeNameS, factor, roundValues)
 		err("Invalid type of argument passed: "..serpent.block(recipeNameS))
 		return
 	end
+	info("These recipes will cost "..tostring(factor).."x of everything: "..serpent.block(recipeNameS))
 	for _,name in pairs(recipeNameS) do
 		local recipe = data.raw.recipe[name]
 		for _,data in pairs(recipe.ingredients) do
 			if data.type then
 				data.amount = (data.amount or 1) * factor
 				if roundValues then data.amount = round(data.amount) end
-				info(name.." costs * "..tostring(factor).." -> "..tostring(data.amount).." "..data.name)
 			else
 				data[2] = (data[2] or 1) * factor
 				if roundValues then data[2] = round(data[2]) end
-				info(name.." costs * "..tostring(factor).." -> "..tostring(data[2]).." "..data[1])
 			end
 		end
 	end
@@ -109,17 +106,18 @@ function recipeChangeResultByFactor(recipeNameS,factor, roundValues)
 		err("Invalid type of argument passed: "..serpent.block(recipeNameS))
 		return
 	end
+	info("These recipes will result "..tostring(factor).."x of everything: "..serpent.block(recipeNameS))
 	for _,name in pairs(recipeNameS) do
 		local recipe = data.raw.recipe[name]
 		if recipe.result then
 			recipe.result_count = (recipe.result_count or 1) * factor
 			if roundValues then recipe.result_count = round(recipe.result_count) end
-			info(name.." results * "..tostring(factor).." -> "..tostring(recipe.result_count))
+			--info(name.." results * "..tostring(factor).." -> "..tostring(recipe.result_count))
 		else
 			for _,data in pairs(recipe.results) do
 				data.amount = (data.amount or 1) * factor
 				if roundValues then data.amount = round(data.amount) end
-				info(name.." results * "..tostring(factor).." -> "..tostring(data.amount).." "..data.name)
+				--info(name.." results * "..tostring(factor).." -> "..tostring(data.amount).." "..data.name)
 			end
 		end
 	end

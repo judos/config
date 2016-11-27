@@ -1,6 +1,6 @@
 -- General recipe changes
-recipeChangeCostsForItemsByFactor("iron-plate", 2, true)
-recipeChangeResultsForItemsByFactor("iron-plate", 2, true)
+recipeChangeCostsForItemsByFactor("iron-plate", 2)
+recipeChangeResultsForItemsByFactor("iron-plate", 2)
 
 
 -- Slow down the speed of all transport-belts
@@ -18,3 +18,7 @@ changeEntitiesPropertyByFactor( entitiesOfCategory("cargo-wagon", "car"), "inven
 
 --true means: round the values (inventory_size which is a decimal value will produce errors at startup of factorio)
 changeEntitiesPropertyByFactor( entitiesOfCategory("logistic-container", "container"), "inventory_size", 0.25, true) 
+
+
+-- Change technology: more science packs produced and required
+recipeChangeResultsForItemsByFactor({"science-pack-1","science-pack-2","science-pack-3"}, 5)

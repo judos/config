@@ -1,6 +1,6 @@
 {
 	"name": "config",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"title": "Configurable Factorio",
 	"author": "judos",
 	"description": "Let's you configure many global properties of Factorio. It includes also a few predefined config sets which give you some new Factorio challenges",

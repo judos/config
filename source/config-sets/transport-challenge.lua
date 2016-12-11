@@ -5,7 +5,8 @@ recipeChangeResultsForItemsByFactor("iron-plate", 2)
 
 -- Slow down the speed of all transport-belts
 recipeChangeCostsByFactor(recipeNamesOfItems(entityNamesOfCategory("transport-belt", "underground-belt", "splitter")), 2)
-changeEntitiesPropertyByFactor( entitiesOfCategory("transport-belt"), "speed", 0.4)
+changeEntitiesPropertyByFactor( entitiesOfCategory("transport-belt","splitter","underground-belt"), "speed", 0.4)
+
 
 --true means: round the values (decimal values will produce errors for this property)
 recipeChangeCostsByFactor(recipeNamesOfItems(entityNamesOfCategory("locomotive", "cargo-wagon", "car")), 0.4, true)

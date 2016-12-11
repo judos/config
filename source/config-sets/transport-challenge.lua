@@ -11,13 +11,13 @@ changeEntitiesPropertyByFactor( entitiesOfCategory("transport-belt"), "speed", 0
 recipeChangeCostsByFactor(recipeNamesOfItems(entityNamesOfCategory("locomotive", "cargo-wagon", "car")), 0.4, true)
 changeEntitiesPropertyByFactor( entitiesOfCategory("cargo-wagon", "locomotive"), "max_speed", 1.5)
 changeEntitiesPropertyByFactor( entitiesOfCategory("cargo-wagon", "locomotive", "car"), "weight", 0.5)
-changeEntitiesPropertyByFactor( entitiesOfCategory("cargo-wagon", "car"), "inventory_size", 0.25, true)
+changeEntitiesPropertyByFactor( entitiesOfCategory("cargo-wagon", "car"), "inventory_size", 0.25, true, 1)
 
 -- TODO for next time: (access sub properties)
 --changeEntitiesPropertyByFactor( entitiesOfCategory("locomotive"), "energy_source.fuel_inventory_size", 0.33, true)
 
 --true means: round the values (inventory_size which is a decimal value will produce errors at startup of factorio)
-changeEntitiesPropertyByFactor( entitiesOfCategory("logistic-container", "container"), "inventory_size", 0.25, true) 
+changeEntitiesPropertyByFactor( entitiesOfCategory("logistic-container", "container"), "inventory_size", 0.25, true, 1) 
 
 
 -- Change technology: more science packs produced and required

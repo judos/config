@@ -1,0 +1,9 @@
+Configurables:
+
+- mine buildings
+- mine turrets
+- handcrafting speed
+- gamespeed
+- handmining
+- lab speed
+- enemies

@@ -1,2 +1,2 @@
 
-config_set = "transport-challenge"
+config_set = "easy-3x-sp"

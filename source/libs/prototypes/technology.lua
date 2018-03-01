@@ -1,5 +1,6 @@
 -- technologies: "all", or specific technology, or a table of tech-names
--- factor: by how much to increase it's cost
+-- factor: by how much to increase or decrease the cost of a research step
+-- NOTE: most technologies cost already only 1 science pack (times some amount), so factor < 1 won't do anything
 function technologyChangeIngredientsAmountByFactor(techNames,items,factor)
 	info("The following technologies will cost "..tostring(factor).."x times of "..serpent.block(items)..": "..serpent.block(techNames))
 	if type(techNames) == "string" then
@@ -20,14 +21,30 @@ function technologyChangeIngredientsAmountByFactor(techNames,items,factor)
 		if techSet[tech.name] or techSet["all"] then
 			for _,data in pairs(tech.unit.ingredients) do
 				if itemSet[data[1]] or itemSet["all"] then
-					data[2] = data[2] * factor
+					data[2] = math.max(1,round(data[2] * factor,0))
 				end
 			end
 		end
 	end
 end
 
-
+-- technologies: "all", or specific technology, or a table of tech-names
+-- factor: by how much to increase or decrease the amount of all science packs needed
+function technologyChangeAmountByFactor(techNames,factor)
+	info("The following technologies will cost "..tostring(factor).."x times: "..serpent.block(techNames))
+	if type(techNames) == "string" then
+		techNames = {techNames}
+	elseif type(techNames) ~= "table" then
+		err("techNames passed are not a string or table: "..serpent.block(techNames))
+		return
+	end
+	local techSet = table.set(techNames)
+	for _,tech in pairs(data.raw.technology) do
+		if techSet[tech.name] or techSet["all"] then
+			tech.unit.count = math.max(1,round(tech.unit.count * factor,0))
+		end
+	end
+end
 
 -- adds a recipe which is unlocked when the given technology is researched
 function addTechnologyUnlocksRecipe(technologyName, recipeName)

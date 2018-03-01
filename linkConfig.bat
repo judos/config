@@ -1,0 +1,1 @@
+mklink /j "mods/config_0.0.3" "D:\modding\factorio\config\source"
